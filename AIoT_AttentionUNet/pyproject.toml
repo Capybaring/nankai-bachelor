@@ -1,0 +1,41 @@
+   [tool.black]
+    line-length = 88
+    include = '\.pyi?$'
+    exclude = '''
+    /(
+        \.git
+      | \.hg
+      | \.mypy_cache
+      | \.tox
+      | \.venv
+      | _build
+      | buck-out
+      | build
+      | dist
+
+      # The following are specific to Black, you probably don't want those.
+      | blib2to3
+      | tests/data
+    )/'''
+
+[tool.poetry]
+name = "attention-unet-pytorch-master"
+version = "0.1.0"
+description = ""
+authors = ["Capybaring <Q3159508394@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+numpy = "^2.2.6"
+progressbar2 = "^4.5.0"
+scikit-image = "^0.25.2"
+scikit-learn = "^1.6.1"
+torch = "^2.7.0"
+opencv-python = "^4.11.0.86"
+matplotlib = "^3.10.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
