@@ -1,0 +1,45 @@
+name: Merge public repositories
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Merge current snapshots of public repositories
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf nku-compiler nku-stock-prediction AIoT_TransUNet
+          mkdir -p nku-compiler nku-stock-prediction AIoT_TransUNet
+
+          git clone --depth 1 --branch master https://github.com/Capybaring/nku-compiler.git /tmp/nku-compiler
+          git clone --depth 1 --branch master https://github.com/Capybaring/nku-stock-prediction.git /tmp/nku-stock-prediction
+          git clone --depth 1 --branch master https://github.com/Capybaring/AIoT_TransUNet.git /tmp/AIoT_TransUNet
+
+          rsync -a --exclude='.git' /tmp/nku-compiler/ nku-compiler/
+          rsync -a --exclude='.git' /tmp/nku-stock-prediction/ nku-stock-prediction/
+          rsync -a --exclude='.git' /tmp/AIoT_TransUNet/ AIoT_TransUNet/
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nku-compiler nku-stock-prediction AIoT_TransUNet
+
+          if git diff --cached --quiet; then
+            echo "No public-repository changes to commit."
+          else
+            git commit -m "Merge public bachelor project repositories"
+            git push origin master
+          fi
