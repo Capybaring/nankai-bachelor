@@ -1,0 +1,7 @@
+numpy==2.2.6
+progressbar2==4.5.0
+scikit-image==0.25.2
+scikit-learn==1.6.1
+torch==2.7.0
+opencv-python==4.11.0.86
+matplotlib==3.10.3
