@@ -1,0 +1,39 @@
+/* ========== 全局样式 ========== */
+:root {
+  --primary: #4d2e07; /* 深褐色 */
+  --primary-dark: #7d5c3c; /* 深棕色 */
+  --primary-light: #f8f4e8; /* 暖米色 */
+  --accent-color: #cab183; /* 金色 */
+  --secondary: #d9b38c; /* 浅棕色 */
+  --secondary-color: #7e9a8f; /* 青绿色 */
+  --text-dark: #5a4a32; /* 深咖啡色 */
+  --text-light: #fffaf0; /* 奶油白 */
+  --highlight: #e6d3ae; /* 亮金色 */
+  --border-radius: 12px;
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --traditional-pattern: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M50,80 Q55,60 70,65 Q85,50 90,65 Q105,55 110,70 Q125,60 130,75 Q145,70 150,85 Q140,95 150,105 Q140,115 150,125 Q135,130 130,145 Q115,140 110,155 Q95,150 90,165 Q75,155 70,170 Q60,160 50,170 Q45,155 35,160 Q40,145 30,140 Q45,135 40,120 Q30,125 25,110 Q35,105 30,95 Q25,85 35,80 Q40,95 50,80 Z" fill="none" stroke="%23c9a769" stroke-width="1.2" stroke-opacity="0.15"/></svg>');
+}
+
+body {
+  background-color: #f0e6d8; /* 柔和的浅黄色 */
+  font-family: "Microsoft YaHei", "STKaiti", serif;
+  margin: 0;
+  background-image: var(--traditional-pattern);
+  background-size: 120px;
+  background-attachment: fixed;
+  animation: fadeIn 0.6s ease-out;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

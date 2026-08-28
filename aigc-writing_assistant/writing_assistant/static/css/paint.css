@@ -1,0 +1,315 @@
+/* 主体内容区 */
+main {
+  padding: 32px 16px 64px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.main-title {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.main-title h2 {
+  font-size: 28px;
+  background: linear-gradient(to right, var(--primary-dark), var(--primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.main-title p {
+  color: #6c757d;
+}
+
+.core-feature {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--text-light);
+  margin-bottom: 32px;
+}
+
+.core-feature::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+}
+
+/* 响应式优化 */
+@media (min-width: 768px) {
+  .core-feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* 输入区优化 */
+.poem-input {
+  flex: 1 1 400px; /* 可伸缩性、基础尺寸 */
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.poem-input h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary);
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 25px;
+}
+
+.poem-input textarea {
+  background: #f8f9fa;
+  border: 1px solid #e1e5eb;
+  border-radius: var(--border-radius);
+  transition: border-color 0.3s;
+  font-size: 15px;
+  line-height: 1.7;
+  width: 100%;
+  height: 200px;
+}
+
+.poem-input textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(51, 102, 153, 0.1);
+}
+
+.submit-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-weight: 600;
+  padding: 14px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background: #2d5986;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 画廊区域 */
+.gallery-section {
+  flex: 1 1 400px; /* 可伸缩性、基础尺寸 */
+  margin-top: 0;
+}
+
+.gallery-section h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary);
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 25px;
+}
+
+.gallery-placeholder {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.gallery-placeholder i {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  color: var(--secondary);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .gallery-placeholder {
+    height: auto;
+  }
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #cd853f;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 图片操作按钮样式 */
+.image-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  background-color: #cd853f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.action-btn:hover {
+  background-color: #a56a2c;
+}
+
+/* 错误信息样式 */
+.error-message {
+  text-align: center;
+  padding: 20px;
+}
+
+/* 新增的CSS样式 */
+.upload-area {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.upload-area.has-image {
+  padding: 0;
+  border: none;
+}
+
+.upload-area:hover {
+  border-color: #4a90e2;
+  background-color: #f0f7ff;
+}
+
+.upload-btn {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.upload-btn i {
+  font-size: 3rem;
+  color: #4a90e2;
+}
+
+.image-preview {
+  max-height: 300px;
+  overflow: hidden;
+  display: none;
+}
+
+.upload-area.has-image .image-preview {
+  display: block;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.poem-placeholder,
+.poem-content {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: #fff;
+}
+
+.poem-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  text-align: left;
+}
+
+.poem-image {
+  flex: 1;
+  max-width: 300px;
+}
+
+.poem-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.poem-text {
+  flex: 2;
+}
+
+.poem-text pre {
+  font-family: inherit;
+  white-space: pre-wrap;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.poem-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+  background-color: #357abd;
+}
+
+.action-btn i {
+  margin-right: 5px;
+}

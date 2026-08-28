@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>登录 - AI写作助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/overall.css">
+    <style>
+        body {
+            background: #f8f5ef;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 120px auto 0 auto;
+            background: var(--text-light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2.5rem 2rem 2rem 2rem;
+            box-sizing: border-box;
+        }
+
+        .login-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-title h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        .login-title p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background: #fff;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: var(--text-light);
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 0.9rem 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+        }
+
+        .login-links {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .login-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .login-links a:hover {
+            color: var(--primary-dark);
+        }
+
+        .error-message {
+            color: #dc3545;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 0.7rem 1rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            .login-container {
+                margin: 60px 8px 0 8px;
+                padding: 1.5rem 0.8rem 1.2rem 0.8rem;
+            }
+
+            .login-title h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 返回主页按钮 -->
+    <div style="text-align:left;max-width:400px;margin:2rem auto 0 auto;">
+        <a href="/" style="color:var(--primary-dark);font-weight:bold;text-decoration:none;font-size:1.1rem;">
+            <i class="fas fa-arrow-left"></i> 返回主页
+        </a>
+    </div>
+    {% if session.get('username') %}
+    <div style="text-align:center;margin-top:1rem;color:var(--primary-dark);font-weight:bold;">
+        欢迎，{{ session['username'] }}！
+        <a href="/logout" style="margin-left:1rem;color:var(--secondary);">退出</a>
+    </div>
+    {% endif %}
+    <div class="login-container">
+        <div class="login-title">
+            <h2><i class="fas fa-user-circle"></i> 用户登录</h2>
+            <p>欢迎使用AI写作助手，请登录后体验更多功能</p>
+        </div>
+        <form id="loginForm" method="post" action="/login">
+            {% if error %}
+            <div class="error-message" style="display:block">{{ error }}</div>
+            {% endif %}
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" placeholder="请输入密码" required>
+            </div>
+            <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> 登录</button>
+        </form>
+        <div class="login-links">
+            <a href="/register">注册账号</a>|
+            <a href="/forgot">忘记密码？</a>
+        </div>
+    </div>
+    <script>
+        // 可选：前端简单校验和错误提示
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            var username = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value.trim();
+            var errorDiv = document.getElementById('loginError');
+            if (!username || !password) {
+                errorDiv.textContent = '用户名和密码不能为空';
+                errorDiv.style.display = 'block';
+                e.preventDefault();
+            } else {
+                errorDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

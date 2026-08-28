@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>文言文分析 - AI文言赏析助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/overall.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/classicalChinese.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-pen-nib"></i>
+                <span>诗词少年</span>
+            </div>
+            <!-- 导航菜单 -->
+            <nav class="nav-menu">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <a href="/poem"><i class="fas fa-pen"></i> 诗词创作</a>
+                <a href="/classicalChinese"  class="text-primary"><i class="fas fa-book"></i> 文言文分析</a>
+                <a href="/material"><i class="fas fa-image"></i> 素材库</a>
+                <a href="/paint"><i class="fas fa-palette"></i> 图文生成</a>
+                {% if session.get('username') %}
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> 登出</a>
+                {% else %}
+                <a href="/login"><i class="fas fa-user"></i> 登录/注册</a>
+                {% endif %}
+            </nav>
+            <!-- 汉堡菜单按钮 -->
+            <button id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu">
+            <div class="mobile-menu-container">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <a href="/poem"><i class="fas fa-pen"></i> 诗词创作</a>
+                <a href="/classicalChinese"  class="text-primary"><i class="fas fa-book"></i> 文言文分析</a>
+                <a href="/material"><i class="fas fa-image"></i> 素材库</a>
+                <a href="/paint"><i class="fas fa-palette"></i> 图文生成</a>
+                {% if session.get('username') %}
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> 登出</a>
+                {% else %}
+                <a href="/login"><i class="fas fa-user"></i> 登录/注册</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <!-- 主体内容区 -->
+    <main>
+        <!-- 主题标题 -->
+        <div class="main-title">
+            <h2>AI赋能，赏析古代文言经典</h2>
+            <p>无需注册，直接粘贴文言文内容即可体验AI智能分析</p>
+        </div>
+        <div class="core-feature">
+            <!-- 左侧输入区域 -->
+            <div class="input-section">
+                <h3>输入文言文</h3>
+                <textarea id="classicalText" placeholder="在此粘贴文言文内容..."></textarea>
+                <button id="analyzeBtn" class="analyze-btn">
+                    <i class="fas fa-magic"></i> 开始分析
+                </button>
+            </div>
+            <!-- 右侧结果区域 -->
+            <div class="result-section">
+                <div class="function-nav">
+                    <button class="tab-btn active" data-target="translation">
+                        <i class="fas fa-language"></i> 逐句翻译
+                    </button>
+                    <button class="tab-btn" data-target="words">
+                        <i class="fas fa-book"></i> 重点字词
+                    </button>
+                    <button class="tab-btn" data-target="theme">
+                        <i class="fas fa-lightbulb"></i> 主旨分析
+                    </button>
+                </div>
+                <div class="result-content">
+                    <div id="translationResult" class="tab-content active">
+                        <div class="content-scroll">
+                            <div class="translation-list"></div>
+                        </div>
+                    </div>
+                    <div id="wordsResult" class="tab-content">
+                        <div class="content-scroll">
+                            <div class="words-list"></div>
+                        </div>
+                    </div>
+                    <div id="themeResult" class="tab-content">
+                        <div class="content-scroll">
+                            <div class="theme-list"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="error-messages">
+                    <div id="translationError" class="error-message"></div>
+                    <div id="wordsError" class="error-message"></div>
+                    <div id="themeError" class="error-message"></div>
+                </div>
+            </div>
+            <!-- 全局loading遮罩 -->
+            <div class="loading" id="globalLoading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>正在分析中...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部信息栏 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-shield-alt"></i> 隐私政策</a>
+                <a href="#"><i class="fas fa-hands-helping"></i> 公益计划</a>
+                <a href="#"><i class="fas fa-envelope"></i> 联系我们</a>
+                <a href="#"><i class="fas fa-tools"></i> 技术支持</a>
+            </div>
+            <p>© 2025 蓝心执笔人团队 | AI助力创作，弘扬诗词文化</p>
+
+            <div class="social-links">
+                <a href="#"><i class="fab fa-weixin"></i></a>
+                <a href="#"><i class="fab fa-weibo"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-rss"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="../static/js/classicalChinese.js"></script>
+    <script src="../static/js/overall.js"></script>
+</body>
+
+</html>
